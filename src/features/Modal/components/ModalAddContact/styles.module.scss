@@ -1,0 +1,11 @@
+@import "../../../../constants/styleVariable";
+
+.form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.requiredField label::after {
+  content:" *";
+  color: $stiletto;
+}

@@ -1,0 +1,66 @@
+@import "../../../../constants/styleVariable";
+
+.controlPanel {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 30px;
+}
+
+.addContactButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $tundora;
+  transition: .2s;
+
+  &:hover {
+    color: lighten($tundora, 5%);
+  }
+}
+
+.dropdownLabel {
+  margin-right: 5px;
+}
+
+.searchSection {
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: 1024px) {
+    margin-bottom: 25px;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.searchInputClass {
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 10px;
+  }
+}
+
+.dropdownSearchByClass {
+  margin-right: 5px;
+  min-width: 100px !important;
+
+  @media screen and (max-width: 768px) {
+    margin: 10px 0;
+  }
+}
+
+.pagesAmountAddContactSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdownPagesSection {
+  margin-right: 10px;
+}

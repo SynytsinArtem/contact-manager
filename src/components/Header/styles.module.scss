@@ -1,0 +1,13 @@
+@import "../../constants/styleVariable";
+
+.header {
+  background: $tundora;
+  margin-bottom: 30px;
+  padding: 10px 0;
+  user-select: none;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
