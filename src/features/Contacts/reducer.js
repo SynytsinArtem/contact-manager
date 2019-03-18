@@ -23,14 +23,8 @@ const contactsReducer = (state = initialState, { type, payload }) => {
     case types.GET_CONTACTS_SUCCESS:
       return {
         ...state,
-        contactList: payload,
-        loading: false,
-      };
-
-    case types.GET_CONTACTS_LENGTH_SUCCESS:
-      return {
-        ...state,
-        contactListLength: payload,
+        contactList: payload.contactList,
+        contactListLength: payload.contactListLength,
         loading: false,
       };
 

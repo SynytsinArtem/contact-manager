@@ -27,7 +27,7 @@ class ContactsContainer extends React.Component {
   }
 
   receiveContacts = () => {
-    const { receiveContactsThunk, receiveContactsLengthThunk } = this.props;
+    const { receiveContactsThunk } = this.props;
     const {
       activePage,
       contactsPerPage,
@@ -37,12 +37,7 @@ class ContactsContainer extends React.Component {
       },
     } = this.state;
 
-    receiveContactsLengthThunk(searchValue, searchBy)
-      .then((message) => {
-        if (message !== 'Network Error') {
-          receiveContactsThunk(activePage, contactsPerPage, searchValue, searchBy);
-        }
-      })
+    receiveContactsThunk(activePage, contactsPerPage, searchValue, searchBy)
       .then(() => this.checkActivePage());
   };
 
@@ -241,7 +236,6 @@ class ContactsContainer extends React.Component {
 
 ContactsContainer.propTypes = {
   receiveContactsThunk: PropTypes.func.isRequired,
-  receiveContactsLengthThunk: PropTypes.func.isRequired,
   contactList: PropTypes.arrayOf(PropTypes.shape(contactPropType)),
   contactListLength: PropTypes.number,
   showModal: PropTypes.func.isRequired,

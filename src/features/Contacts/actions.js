@@ -15,11 +15,6 @@ const getContactsSuccess = payload => ({
   payload,
 });
 
-const getContactsLengthSuccess = payload => ({
-  type: types.GET_CONTACTS_LENGTH_SUCCESS,
-  payload,
-});
-
 export const receiveContactsThunk = (page, limit, searchValue = '', searchBy) => (dispatch, state, api) => {
   dispatch(requestStart());
 
@@ -29,28 +24,15 @@ export const receiveContactsThunk = (page, limit, searchValue = '', searchBy) =>
   };
 
   return api(`contacts?_sort=name&_order=asc&_page=${page}&_limit=${limit}&${searchParams.key}${searchParams.value}`)
-    .then(response => dispatch(getContactsSuccess(response.data)))
+    .then((response) => {
+      const contactListLength = Number(response.headers['x-total-count']);
+      const contactList = response.data;
+
+      dispatch(getContactsSuccess({ contactListLength, contactList }));
+    })
     .catch((error) => {
       toast.error(error.message);
       dispatch(requestCompleted());
-    });
-};
-
-export const receiveContactsLengthThunk = (searchValue = '', searchBy) => (dispatch, state, api) => {
-  dispatch(requestStart());
-
-  const searchParams = {
-    key: searchBy ? `${searchBy}_like=` : '',
-    value: searchValue,
-  };
-
-  return api(`contacts?${searchParams.key}${searchParams.value}`)
-    .then(response => dispatch(getContactsLengthSuccess(response.data.length)))
-    .catch(({ message }) => {
-      toast.error(message);
-      dispatch(requestCompleted());
-
-      return message;
     });
 };
 
