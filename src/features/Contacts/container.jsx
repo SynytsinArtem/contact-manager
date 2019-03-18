@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Contacts from './component';
 import * as actions from './actions';
-import * as modalActions from '../Modal/actions';
+import * as modalActions from '../Modals/actions';
 import { convertContactForRequest, convertContactForEdit } from './utils';
 import { contactPropType } from '../../utils/custom-prop-types';
 import ContactCallHistory from './components/ContactCallHistory/ContactCallHistory';

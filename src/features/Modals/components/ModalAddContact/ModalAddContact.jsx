@@ -6,18 +6,10 @@ import { Message, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Modal from '../Modal';
-import {
-  emailValidateRegexp,
-  phoneValidateRegexp,
-  dateValidateRegexp,
-  urlValidateRegexp,
-  inputValueMaxLength,
-} from '../../../../constants/constants';
+import validate from '../../utils';
 import { contactPropType } from '../../../../utils/custom-prop-types';
-import { validateValueLength } from '../../../Contacts/utils';
 
 import styles from './styles.module.scss';
-
 
 class ModalAddContactContainer extends Component {
   componentDidMount() {
@@ -163,68 +155,6 @@ ModalAddContactContainer.propTypes = {
 
 ModalAddContactContainer.defaultProps = {
   contact: null,
-};
-
-const validate = ({
-  firstName,
-  lastName,
-  phone,
-  email,
-  birthday,
-  imageURL,
-}) => {
-  const errors = {};
-  const maxValueLengthError = `Value length should be no more than ${inputValueMaxLength} characters`;
-
-  if (!firstName || firstName.trim() === '') {
-    errors.firstName = 'First name is required';
-  }
-
-  if (firstName && !validateValueLength(firstName, inputValueMaxLength)) {
-    errors.firstName = maxValueLengthError;
-  }
-
-  if (email && !emailValidateRegexp.test(email)) {
-    errors.email = 'email should be valid';
-  }
-
-  if (email && !validateValueLength(email, inputValueMaxLength)) {
-    errors.email = maxValueLengthError;
-  }
-
-  if (!lastName || lastName.trim() === '') {
-    errors.lastName = 'Last name is required';
-  }
-
-  if (lastName && !validateValueLength(lastName, inputValueMaxLength)) {
-    errors.lastName = maxValueLengthError;
-  }
-
-  if (!phone || phone.trim() === '') {
-    errors.phone = 'Phone number is required';
-  }
-
-  if (phone && !phoneValidateRegexp.test(phone)) {
-    errors.phone = 'Phone number should be valid';
-  }
-
-  if (phone && !validateValueLength(phone, inputValueMaxLength)) {
-    errors.phone = maxValueLengthError;
-  }
-
-  if (birthday && !dateValidateRegexp.test(birthday)) {
-    errors.birthday = 'Date should be in MM/DD/YYYY format';
-  }
-
-  if (imageURL && !urlValidateRegexp.test(imageURL)) {
-    errors.imageURL = 'URL should be valid';
-  }
-
-  if (imageURL && !validateValueLength(imageURL, inputValueMaxLength)) {
-    errors.imageURL = maxValueLengthError;
-  }
-
-  return errors;
 };
 
 const mapDispatchToProps = dispatch => ({
