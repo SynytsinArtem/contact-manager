@@ -1,5 +1,4 @@
 import {
-  dateValidateRegexp,
   emailValidateRegexp,
   inputValueMaxLength,
   phoneValidateRegexp, urlValidateRegexp,
@@ -11,7 +10,6 @@ const validate = ({
   lastName,
   phone,
   email,
-  birthday,
   imageURL,
 }) => {
   const errors = {};
@@ -51,10 +49,6 @@ const validate = ({
 
   if (phone && !validateValueLength(phone, inputValueMaxLength)) {
     errors.phone = maxValueLengthError;
-  }
-
-  if (birthday && !dateValidateRegexp.test(birthday)) {
-    errors.birthday = 'Date should be in MM/DD/YYYY format';
   }
 
   if (imageURL && !urlValidateRegexp.test(imageURL)) {

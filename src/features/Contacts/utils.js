@@ -1,8 +1,22 @@
+const getConvertedStringDate = (date) => {
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+};
+
 export const convertContactForRequest = (contact) => {
   const convertedContact = {};
 
   Object.keys(contact).forEach((key) => {
     if (key === 'firstName' || key === 'lastName') {
+      return;
+    }
+
+    if (key === 'birthday') {
+      convertedContact[key] = getConvertedStringDate(contact[key]);
+
       return;
     }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Message, Form as FormUI } from 'semantic-ui-react';
 import { Form, Field } from 'react-final-form';
+import DatePicker from 'react-datepicker';
 
 import Modal from '../Modal';
 import validate from '../../utils';
@@ -10,6 +11,20 @@ import { contactPropType } from '../../../../utils/custom-prop-types';
 import styles from './styles.module.scss';
 
 class ModalAddContactContainer extends Component {
+  state = {
+    birthday: null,
+  };
+
+  componentDidMount() {
+    const { contact } = this.props;
+
+    if (contact) {
+      this.setState({
+        birthday: new Date(contact.birthday),
+      });
+    }
+  }
+
   renderInput = ({ input, meta: { touched, error }, ...custom }) => {
     const hasError = touched && error !== undefined;
 
@@ -31,6 +46,38 @@ class ModalAddContactContainer extends Component {
         )}
       </>
     );
+  };
+
+  renderDatePicker = ({ input: { onChange } }) => {
+    const { birthday } = this.state;
+
+    return (
+      <div className="field">
+        <label htmlFor="birthday">
+          Birthday
+        </label>
+        <DatePicker
+          id="birthday"
+          placeholderText="Birthday"
+          isClearable
+          peekNextMonth
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
+          selected={birthday}
+          onChange={(value) => {
+            this.handleBirthdayChange(value);
+            onChange(value);
+          }}
+        />
+      </div>
+    );
+  };
+
+  handleBirthdayChange = (value) => {
+    this.setState({
+      birthday: value,
+    });
   };
 
   render() {
@@ -93,10 +140,9 @@ class ModalAddContactContainer extends Component {
                   placeholder="Phone number"
                 />
                 <Field
-                  component={this.renderInput}
+                  component={this.renderDatePicker}
                   label="Birthday"
                   name="birthday"
-                  placeholder="MM/DD/YYYY"
                 />
                 <Field
                   component={this.renderInput}
@@ -116,6 +162,7 @@ class ModalAddContactContainer extends Component {
                     onClick={(event) => {
                       event.preventDefault();
                       form.reset();
+                      this.handleBirthdayChange(null);
                     }}
                   >
                     Reset

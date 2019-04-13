@@ -15,7 +15,4 @@ export const emailValidateRegexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:
 export const phoneValidateRegexp = /^([+]?[0-9\s-\(\)]{3,25})*$/i;
 
 // eslint-disable-next-line no-useless-escape
-export const dateValidateRegexp = /^(0?[1-9]|1[012])[\/](0?[1-9]|[12][0-9]|3[01])[\/]\d{4}$/;
-
-// eslint-disable-next-line no-useless-escape
 export const urlValidateRegexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
