@@ -4,5 +4,8 @@
         "browser": true,
         "jest": true
     },
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "rules": {
+      "linebreak-style": 0
+    }
 }
